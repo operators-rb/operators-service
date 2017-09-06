@@ -1,6 +1,6 @@
 require 'bundler/setup'
 require 'byebug'
-require 'operators/service'
+require 'operators-service'
 
 RSpec.configure do |config|
   config.order = :random

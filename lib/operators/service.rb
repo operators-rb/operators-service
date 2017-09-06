@@ -1,5 +1,3 @@
-require 'dry-monads'
-
 module Operators
   class Service
     def self.rescue_callbacks(*exceptions)
@@ -37,7 +35,7 @@ module Operators
     end
 
     def calling
-      raise 'Must be redefined'
+      raise 'Not implemented'
     end
   end
 end
