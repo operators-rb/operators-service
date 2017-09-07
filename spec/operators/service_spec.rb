@@ -1,6 +1,6 @@
-RSpec.describe Operators::Service do
+describe Operators::Service do
   before do
-    class TestSerivce < Operators::Service
+    class TestService < Operators::Service
       rescue_callbacks SyntaxError
 
       def initialize(data, result)
@@ -19,17 +19,17 @@ RSpec.describe Operators::Service do
   end
 
   it 'success result' do
-    result = TestSerivce.call('data', true)
+    result = TestService.call('data', true)
     expect(result.success?).to be_truthy
   end
 
   it 'failure result' do
-    result = TestSerivce.call('data', false)
+    result = TestService.call('data', false)
     expect(result.success?).to be_falsey
   end
 
   context 'catch error' do
-    subject { TestSerivce.new('error', true) }
+    subject { TestService.new('error', true) }
 
     it 'catch' do
       allow(subject).to receive(:calling).and_raise(SyntaxError)
