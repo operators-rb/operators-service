@@ -1,8 +1,14 @@
 # Operators::Service
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/operators/service`. To experiment with that code, run `bin/console` for an interactive prompt.
+Operators::Service is a lightweight implementation of Service Object based on Either Monad. That gives an home of application business logic.
 
-TODO: Delete this and the text above, and describe your gem
+Service Objects are created when an action:
+
+* Uses integration with external services
+
+* Uses several models
+
+* Is complex (such as calculating sales statistics)
 
 ## Installation
 
@@ -32,7 +38,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/operators-service.
+Bug reports and pull requests are welcome on GitHub at https://github.com/operators-rb/operators-service.
 
 
 ## License
