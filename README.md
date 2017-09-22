@@ -28,20 +28,60 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+class Auth < Operators::Service
+  rescue_callbacks AuthError, CredentialsError
 
-## Development
+  def initialize(credentials)
+    @options = options
+  end
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+  def calling
+    return failure('User already authed') if @options[:failure] # returns Dry::Monada::Left('User already authed')
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    first_auth_transaction
+    second_auth_transaction
+
+    success('ok') # returns Dry::Monada::Right('ok')
+  end
+
+  private
+
+  def first_auth_transaction
+    # do something...
+  end
+
+  def second_auth_transaction
+    raise AuthError, 'Auth error message' if @options[:auth_error]
+  end
+
+  # Wrapper for your error result
+  def error_wrap(error)
+    error # 'User already authed' || 'Auth error message'
+  end
+
+  # Wrapper for your success results
+  def success_wrap(success_result)
+    success_result # ok
+  end
+end
+```
+
+```ruby
+success = Auth.call(email: 'email', password: 'password')
+# Dry::Monada::Right('ok')
+
+failure = Auth.call(email: 'email', password: 'password', failure: true)
+# Dry::Monada::Left('User already authed')
+
+raised_error = Auth.call(email: 'email', password: 'password', auth_error: true)
+# Dry::Monada::Left('Auth error message')
+```
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/operators-rb/operators-service.
 
-
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
