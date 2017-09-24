@@ -37,12 +37,12 @@ class Auth < Operators::Service
   end
 
   def calling
-    return failure('User already authed') if @options[:failure] # returns Dry::Monada::Left('User already authed')
+    return failure('User already authed') if @options[:failure] # returns Dry::Monads::Left('User already authed')
 
     first_auth_transaction
     second_auth_transaction
 
-    success('ok') # returns Dry::Monada::Right('ok')
+    success('ok') # returns Dry::Monads::Right('ok')
   end
 
   private
@@ -69,13 +69,13 @@ end
 
 ```ruby
 success = Auth.call(email: 'email', password: 'password')
-# Dry::Monada::Right('ok')
+# Dry::Monads::Right('ok')
 
 failure = Auth.call(email: 'email', password: 'password', failure: true)
-# Dry::Monada::Left('User already authed')
+# Dry::Monads::Left('User already authed')
 
 raised_error = Auth.call(email: 'email', password: 'password', auth_error: true)
-# Dry::Monada::Left('Auth error message')
+# Dry::Monads::Left('Auth error message')
 ```
 
 ## Contributing
