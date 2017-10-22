@@ -32,7 +32,7 @@ Or install it yourself as:
 class Auth < Operators::Service
   rescue_callbacks AuthError, CredentialsError
 
-  def initialize(credentials)
+  def initialize(options)
     @options = options
   end
 
