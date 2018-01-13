@@ -1,5 +1,9 @@
 # Operators::Service
 
+[![Gem Version](https://badge.fury.io/rb/operators-service.svg)](https://badge.fury.io/rb/operators-service)
+[![CircleCI](https://circleci.com/gh/operators-rb/operators-service.svg?style=shield&circle-token=ce6107feab9a4989e9c8163c6d652bb1bad40cf7)](https://circleci.com/gh/operators-rb/operators-service)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3fc7bafea686b44d257f/maintainability)](https://codeclimate.com/github/operators-rb/operators-service/maintainability)
+
 Operators::Service is a lightweight implementation of Service Object based on Either Monad. That gives an home of application business logic.
 
 Service Objects are created when an action:
