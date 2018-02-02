@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'You will always know the type of the result'
   spec.description   = 'Service Object is based on Either Monad'
-  spec.homepage      = 'http://operators-rb.org'
+  spec.homepage      = 'https://github.com/operators-rb/operators-service'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
