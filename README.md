@@ -33,6 +33,51 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+class UserCreator < Operators::Service
+  attr_reader :params
+  
+  def initialize(params)
+    @params = params
+  end
+
+  def call
+    user = User.create(params)
+    if !user.new_record?
+      success(user)
+    else
+      failure(user.errors)
+    end
+  end
+end
+```
+
+`success` - returns instance of `Dry::Monads::Either::Right`
+
+`failure` - returns instance of `Dry::Monads::Either::Left`
+
+```ruby
+class UsersController < ApplicationController
+  def create
+    UserCreator.call(user_params).fmap do |user|
+      render json: user
+    end.or_fmap do |errors|
+      render json: errors.full_messages
+    end
+  end
+  
+  private
+  
+  def user_params
+    params.require(:user).permit!
+  end
+end
+```
+
+### More complicated usage
+
+If you need `rescue_callbacks` then you should define `calling` instead of `call`.
+
+```ruby
 class Auth < Operators::Service
   rescue_callbacks AuthError, CredentialsError
 
