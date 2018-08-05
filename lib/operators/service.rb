@@ -8,6 +8,14 @@ module Operators
           failure(error.message)
         end
       end
+
+      define_method :failure_wrapper do |&block|
+        begin
+          block.call
+        rescue *exceptions => error
+          failure(error.message)
+        end
+      end
     end
 
     rescue_callbacks
